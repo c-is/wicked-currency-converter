@@ -1,0 +1,21 @@
+@import '../../css/_variables.css';
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 7.255rem;
+  padding: 0 var(--content-space);
+  padding-bottom: 1.666rem;
+  text-align: right;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+  .footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    text-align: center;
+  }
+}

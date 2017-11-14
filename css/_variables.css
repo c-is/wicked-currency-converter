@@ -1,0 +1,34 @@
+:root {
+  /*
+   * Typography
+   * ======================================================================== */
+
+  --font-main: 'Futura', 'Helvetica', sans-serif;
+  --font-sub: 'Marion', 'Baskerville Old Face', 'Baskerville', 'Times New Roman MT Std-Cond', 'Times New Roman', serif;
+
+  /*
+   * Layout
+   * ======================================================================== */
+
+  --max-content-width: 1440px;
+  --content-space: 3.333rem;
+
+  /*
+   * Media queries breakpoints
+   * ======================================================================== */
+
+  --screen-xs-min: 480px;  /* Extra small screen / phone */
+  --screen-sm-min: 992px;  /* Small screen / tablet */
+  --screen-md-min: 1280px;  /* Medium screen / desktop */
+  --screen-lg-min: 1920px; /* Large screen / wide desktop */
+
+  /*
+   * Colours
+   * ======================================================================== */
+
+  --colour-main: #000;
+  --colour-sub: #696969;
+  --colour-bg: #f7f7f7;
+  --colour-red: #ee2e5b;
+  --colour-blue: #296ec4;
+}

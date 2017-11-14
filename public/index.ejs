@@ -1,0 +1,37 @@
+<!doctype html>
+<html class="no-js" lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= config.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Worlder, magazine, blog, hip, hipster, culture, sub culture, cafe, art, design" />
+    <meta name="author" content="Worlder" />
+    <meta property="article:author" content="<%= config.url %>" />
+    <meta property="article:publisher" content="<%= config.url %>" />
+    <meta property="og:title" content="<%= config.title %>" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:site_name" content="<%= config.title %>"/>
+    <meta property="og:url" content="<%= config.url %>" />
+    <meta property="og:description" content="We aim to show the real value of the world which is sometimes hidden at the corner of a city. A quality makes our lives more meaningful." />
+    <meta property="og:image" content="http://worlder.co/images/common/logo-facebook.png" />
+    <meta property="og:locale" content="en_GB" /> 
+    <link rel="shortcut icon" href="favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="<%= bundle %>"></script>
+    <%_ if (!debug && config.trackingID) { _%>
+    <script>
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','<%= config.trackingID %>','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <%_ } _%>
+  </body>
+</html>
