@@ -24,14 +24,6 @@ class HomePage extends React.Component {
     result: '',
   }
 
-  getCurrency(e) {
-    e.preventDefault();
-
-    const targetValue = this.state.data.rates[this.state.target];
-    const culcAmount = this.state.amount * targetValue;
-    this.setState({ result: culcAmount });
-  }
-
   setTarget(e) {
     const value = e.target.value;
     this.setState({ target: value });
@@ -59,14 +51,29 @@ class HomePage extends React.Component {
     });
   }
 
+  switchCurrency(e) {
+    e.preventDefault();
+
+    if (!this.state.target) return;
+
+    const newBase = this.state.target;
+    const newTarget = this.state.base;
+
+    this.props.update(newBase).then((newData) => {
+      this.setState({
+        data: newData,
+        base: newData.base,
+        target: newTarget,
+      });
+
+      if (this.state.amount) this.displayAmount();
+    });
+  }
+
   updateAmount(e) {
     const value = e.target.value;
 
-    if (isNaN(value) || value > 10000000000000000) {
-      return;
-    }
-
-    console.log(this.state.target);
+    if (isNaN(value) || value > 10000000000000000) return;
 
     if (!this.state.target) {
       TweenMax.to(`.${s.selectTarget}`, 0.4, { borderColor: '#ee2e5b', borderWidth: 2 });
@@ -79,14 +86,21 @@ class HomePage extends React.Component {
     TweenMax.to(`.${s.selectTarget}`, 0.4, { borderColor: '#444444', borderWidth: 1 });
     TweenMax.to(`.${s.ratesList}`, 0.4, { opacity: opacityVal });
 
+    this.setState({ amount: value });
+    this.displayAmount();
+  }
+
+  displayAmount() {
     const targetValue = this.state.data.rates[this.state.target];
 
-    let culcAmount = value * targetValue;
+    let culcAmount = this.state.amount * targetValue;
     culcAmount = Math.floor(culcAmount * (10 ** 2)) / (10 ** 2);
+
+    // add currency symbol
+    culcAmount = culcAmount.toLocaleString(undefined, { style: 'currency', currency: this.state.target });
 
     this.setState({
       result: culcAmount,
-      amount: value,
     });
   }
 
@@ -99,6 +113,7 @@ class HomePage extends React.Component {
 
           <article className={s.content} id="content">
             <form className={s.form}>
+
               <div className={s.base}>
                 <p className={cx(s.contentHead, s.contentHeadBase)}>Base currency</p>
                 <select
@@ -112,6 +127,15 @@ class HomePage extends React.Component {
                   )}
                 </select>
               </div>
+
+
+              <button
+                className={cx(s.switch, this.state.target ? s.switchActive : null)}
+                onClick={e => this.switchCurrency(e)}
+              >
+                Switch
+              </button>
+
 
               <div className={s.target}>
                 <p className={s.contentHead}>Target currency</p>
@@ -127,7 +151,9 @@ class HomePage extends React.Component {
                 </select>
               </div>
 
+
               <div className={s.amount}>
+                <span className={s.baseAmount}>{this.state.base}</span>
                 <input
                   className={s.inputAmount}
                   type="text"
@@ -136,11 +162,13 @@ class HomePage extends React.Component {
                   onChange={e => this.updateAmount(e)}
                 />
 
+
                 <button className={s.buttonClear} onClick={e => this.clear(e)}>Clear</button>
               </div>
 
               <p className={s.result}>{this.state.result}</p>
             </form>
+
 
             <div className={s.ratesList}>
               {Object.keys(data.rates).map(key =>
@@ -153,6 +181,7 @@ class HomePage extends React.Component {
                 </div>,
               )}
             </div>
+
           </article>
         </main>
       </Layout>

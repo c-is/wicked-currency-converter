@@ -50,8 +50,26 @@ p {
   display: inline-block;
 }
 
-.target {
-  margin-left: 6.666em;
+.switch {
+  margin: 0 1.666rem;
+  padding: 0.333rem 0.666rem;
+  background-color: #888;
+  border-radius: 0;
+  border: none;
+  color: #fff;
+  pointer-events: none;
+  opacity: 0.4;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.switchActive {
+  background-color: var(--colour-red);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .amount {
@@ -63,9 +81,26 @@ p {
   font-size: 6.666rem;
 }
 
+.baseAmount {
+  display: inline-block;
+  width: 5.6rem;
+  padding: 1.05rem 0;
+  background-color: var(--colour-blue);
+  color: #fff;
+  text-align: center;
+  vertical-align: top;
+}
+
 .inputAmount {
   width: 70%;
   padding: 1rem;
+  font-size: 1.25rem;
+
+  &:active,
+  &:focus {
+    outline: none;
+    border: 2px solid var(--colour-blue);
+  }
 }
 
 .ratesList {

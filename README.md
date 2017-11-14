@@ -37,5 +37,5 @@
 
 ### notes
 1. You can see Redux is installed in this project, but due to the size of the project, I decided rather to not use it. Redux is maintained here as I usually use it within this simple React template.
-2. I usually follow BEM for a CSS architecture, but isomorphic style this time!
+2. I usually follow BEM for a CSS architecture, but it's isomorphic style this time!
 
