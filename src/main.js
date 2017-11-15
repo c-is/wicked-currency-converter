@@ -49,6 +49,32 @@ function render() {
   getData().then(renderComponent);
 }
 
+const array = [1, 2, [3, [[4], 5]], 6];
+const object = { hello: 1, world: [2, 3, { foo: [[4]] }] };
+function flatten(obj) {
+  if (typeof obj === 'object') {
+    let asArray = [];
+
+    Object.keys(obj).forEach((key) => {
+      const flat = flatten(obj[key]);
+
+      if (flat.length) {
+        asArray = asArray.concat(flat);
+      } else {
+        asArray.push(flat);
+      }
+    });
+    return asArray;
+  } else if (obj.length) {
+    const flatArray = obj.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
+    return flatArray;
+  }
+
+  return obj;
+}
+
+console.log(flatten(array));
+
 render();
 FastClick.attach(document.body);
 

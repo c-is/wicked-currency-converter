@@ -26,7 +26,9 @@ class HomePage extends React.Component {
 
   setTarget(e) {
     const value = e.target.value;
-    this.setState({ target: value });
+    this.setState({ target: value }, () => {
+      if (this.state.amount) this.displayAmount();
+    });
   }
 
   setBase(e) {
@@ -73,7 +75,7 @@ class HomePage extends React.Component {
   updateAmount(e) {
     const value = e.target.value;
 
-    if (isNaN(value) || value > 10000000000000000) return;
+    if (isNaN(value) || value > 100000000000) return;
 
     if (!this.state.target) {
       TweenMax.to(`.${s.selectTarget}`, 0.4, { borderColor: '#ee2e5b', borderWidth: 2 });
